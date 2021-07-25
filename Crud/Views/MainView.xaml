@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="Crud.Views.MainView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:local="clr-namespace:Crud.Views"
+			 xmlns:validationrules="clr-namespace:Crud.ValidationRules"
+			 xmlns:viewmodels="clr-namespace:Crud.ViewModels"
+			 d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+			 mc:Ignorable="d" 
+			 d:DesignHeight="450" d:DesignWidth="900">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="5*"/>
+			<ColumnDefinition Width="3*"/>
+		</Grid.ColumnDefinitions>
+		<DataGrid Grid.Column="0" Grid.Row="0" Margin="10" 
+				  ItemsSource="{Binding PeopleList, UpdateSourceTrigger=PropertyChanged}"
+				  SelectedItem="{Binding SelectedPerson}"
+				  AutoGenerateColumns="False"
+				  CanUserAddRows="False">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Ime" Binding="{Binding FirstName}" Width="*"/>
+				<DataGridTextColumn Header="Priimek" Binding="{Binding LastName}" Width="*"/>
+				<DataGridTextColumn Header="Davčna št." Binding="{Binding FiscalNumber}" Width="*"/>
+				<DataGridTextColumn Header="Naslov" Binding="{Binding Address}" Width="3*"/>
+			</DataGrid.Columns>
+		</DataGrid>
+		<Grid Grid.Column="1" Grid.Row="0" Margin="10" >
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="2*"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<TextBlock Margin="0,5" Grid.Row="0" Grid.Column="0" Text="Ime"/>
+			<TextBox Margin="0,5" Grid.Row="0" Grid.Column="1" Text="{Binding InputPerson.FirstName, Mode=TwoWay}"/>
+			<TextBlock Margin="0,5" Grid.Row="1" Grid.Column="0" Text="Priimek"/>
+			<TextBox Margin="0,5" Grid.Row="1" Grid.Column="1" Text="{Binding InputPerson.LastName, Mode=TwoWay}"/>
+			<TextBlock Margin="0,5" Grid.Row="2" Grid.Column="0" Text="Davčna št."/>
+			<TextBox Margin="0,5" Grid.Row="2" Grid.Column="1">
+				<TextBox.Text>
+					<Binding Path="InputPerson.FiscalNumber" Mode="TwoWay">
+						<Binding.ValidationRules>
+							<validationrules:FiscalNumberValidationRule/>
+						</Binding.ValidationRules>
+					</Binding>
+				</TextBox.Text>
+			</TextBox>
+			<TextBlock Margin="0,5" Grid.Row="3" Grid.Column="0" Text="Naslov"/>
+			<TextBox Margin="0,5" Grid.Row="3" Grid.Column="1" Text="{Binding InputPerson.Address, Mode=TwoWay}"/>
+			<StackPanel Margin="5" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Vertical">
+				<StackPanel Orientation="Horizontal">
+					<Button Margin="5"  MinWidth="80" Content="Dodaj" Command="{Binding CmdCreate}"/>
+					<Button Margin="5" MinWidth="80" Content="Posodobi" Command="{Binding CmdUpdate}"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<Button Margin="5" MinWidth="80" Content="Odstrani" Command="{Binding CmdDelete}"/>
+					<Button Margin="5" MinWidth="80" Content="Išči po davčni" Command="{Binding CmdSearch}"/>
+				</StackPanel>
+			</StackPanel>
+			<TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Message}" Margin="10" />
+
+		</Grid>
+	</Grid>
+</UserControl>

@@ -10,12 +10,12 @@ namespace Crud.ViewModels
 {
 	public class ViewModelBase : ObservableObject
 	{
-		protected GenericDBActions<Person> dataActions = new PeopleDBActions(new PeopleDbContextFactory());
+		//protected GenericDBActions<Person> DataService = new PeopleDBActions(new PeopleDbContextFactory());
 
-
-		public ViewModelBase()
+		public IDataActions<Person> DataService { get; set; }
+		public ViewModelBase(IDataActions<Person> dataService)
 		{
-
+			DataService = dataService;
 		}
 	}
 }

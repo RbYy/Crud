@@ -17,7 +17,7 @@ namespace Crud
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			Window window = new MainWindow();
-			window.DataContext = new MainViewModel();
+			window.DataContext = new MainViewModel(new PeopleDBActions(new PeopleDbContextFactory()));
 			window.Show();
 			base.OnStartup(e);
 		}

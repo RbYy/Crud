@@ -38,20 +38,20 @@ namespace Crud.ViewModels
 			}
 		}
 
-		public MainViewModel()
+		public MainViewModel(IDataActions<Person> dataService) : base(dataService)
 		{
 			CmdCreate = new ActionCommand(Create);
 			CmdUpdate = new ActionCommand(Update);
 			CmdDelete = new ActionCommand(Delete);
 			CmdSearch = new ActionCommand(Search);
-			PeopleList = new ObservableCollection<Person>(dataActions.GetAll().Result);
+			PeopleList = new ObservableCollection<Person>(DataService.GetAll().Result);
 			InputPerson = new();
 		}
 
 		private void Delete(object obj)
 		{
 			if (SelectedPerson != null
-				&& !dataActions.Delete(SelectedPerson.Id).Result)
+				&& !DataService.Delete(SelectedPerson.Id).Result)
 			{
 				Message = new Msg(SelectedPerson).DeleteFail;
 				return;
@@ -75,8 +75,8 @@ namespace Crud.ViewModels
 				return;
 			}
 			SelectedPerson = new(InputPerson);
-			dataActions.Update(SelectedPerson);
-			var index = PeopleList.IndexOf(PeopleList.First((p) => p.Id == InputPerson.Id));
+			DataService.Update(SelectedPerson.Id, SelectedPerson);
+			var index = PeopleList.IndexOf(PeopleList.FirstOrDefault((p) => p.Id == InputPerson.Id));
 			PeopleList[index] = SelectedPerson;
 			Message = new Msg(InputPerson).Updated;
 		}
@@ -92,7 +92,7 @@ namespace Crud.ViewModels
 			var newPerson = new Person(InputPerson);
 			newPerson.Id = 0;
 
-			PeopleList.Add(dataActions.Create(newPerson).Result);
+			PeopleList.Add(DataService.Create(newPerson).Result);
 			SelectedPerson = InputPerson = newPerson;
 			Message = new Msg(SelectedPerson).Created;
 
@@ -101,7 +101,7 @@ namespace Crud.ViewModels
 		// Searches a person by fiscal number (retreiving)
 		private void Search(object o)
 		{
-			Person found = (dataActions as PeopleDBActions).GetByFiscal(InputPerson.FiscalNumber).Result;
+			Person found = (DataService as PeopleDBActions).GetByFiscal(InputPerson.FiscalNumber).Result;
 			if (found == null)
 			{
 				Message = new Msg(inputPerson).NotExist;
@@ -114,7 +114,7 @@ namespace Crud.ViewModels
 
 		public async Task<int> Count()
 		{
-			var people = await dataActions.GetAll();
+			var people = await DataService.GetAll();
 			return people.Count();
 		}
 

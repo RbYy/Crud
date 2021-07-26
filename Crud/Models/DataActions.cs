@@ -11,7 +11,7 @@ namespace Crud.Models
 		Task<IEnumerable<T>> GetAll();
 		Task<T> Create(T item);
 		Task<T> Get(int id);
-		Task<T> Update(T item);
+		Task<T> Update(int id, T item);
 		Task<bool> Delete(int id);
 	}
 }

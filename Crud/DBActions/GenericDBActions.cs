@@ -66,7 +66,7 @@ namespace Crud
 			
 		}
 
-		public async Task<T> Update(T item)
+		public async Task<T> Update(int id, T item)
 		{
 			using (PeopleDbContext context = peopleDbContextFactory.CreateDbContext(new string[] { }))
 			{

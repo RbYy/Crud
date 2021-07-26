@@ -1,4 +1,4 @@
-﻿using Crud.Models;
+﻿using CrudLib.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Crud
+namespace CrudLib
 {
 	public class PeopleDbContext : DbContext
 	{

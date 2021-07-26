@@ -1,6 +1,6 @@
-﻿using Crud.Models;
+﻿using CrudLib.Models;
 
-namespace Crud.ViewModels
+namespace CrudLib.ViewModels
 {
 	public class Msg
 	{

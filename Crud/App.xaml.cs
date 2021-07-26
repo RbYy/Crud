@@ -1,4 +1,5 @@
-﻿using Crud.ViewModels;
+﻿using CrudLib;
+using CrudLib.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

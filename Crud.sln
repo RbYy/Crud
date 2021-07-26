@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crud", "Crud\Crud.csproj", "{866E3A51-4BD2-4D3E-933E-9C0E4D1DD60F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{E5FAF4A4-3016-4EDB-9E5F-885DDE0ECA42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject1", "TestProject1\TestProject1.csproj", "{E5FAF4A4-3016-4EDB-9E5F-885DDE0ECA42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudLib", "CrudLib\CrudLib.csproj", "{9EC7F3D9-DFCD-4644-B74F-F0799114B52A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E5FAF4A4-3016-4EDB-9E5F-885DDE0ECA42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5FAF4A4-3016-4EDB-9E5F-885DDE0ECA42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5FAF4A4-3016-4EDB-9E5F-885DDE0ECA42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EC7F3D9-DFCD-4644-B74F-F0799114B52A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EC7F3D9-DFCD-4644-B74F-F0799114B52A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EC7F3D9-DFCD-4644-B74F-F0799114B52A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EC7F3D9-DFCD-4644-B74F-F0799114B52A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

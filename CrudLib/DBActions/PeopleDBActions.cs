@@ -1,10 +1,10 @@
-﻿using Crud.Models;
+﻿using CrudLib.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
-namespace Crud
+namespace CrudLib
 {
-	internal class PeopleDBActions : GenericDBActions<Person>
+	public class PeopleDBActions : GenericDBActions<Person>
 	{
 		public PeopleDBActions(PeopleDbContextFactory contextFactory) : base(contextFactory)
 		{ }

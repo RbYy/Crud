@@ -3,7 +3,7 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:local="clr-namespace:Crud"
 			 xmlns:views="clr-namespace:Crud.Views"
-			 xmlns:viewmodels="clr-namespace:Crud.ViewModels">
+			 xmlns:viewmodels="clr-namespace:CrudLib.ViewModels">
 	<Application.Resources>
 		<ResourceDictionary>
 			<DataTemplate DataType="{x:Type viewmodels:MainViewModel}">

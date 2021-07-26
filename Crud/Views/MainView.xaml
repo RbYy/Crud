@@ -5,8 +5,9 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:local="clr-namespace:Crud.Views"
 			 xmlns:validationrules="clr-namespace:Crud.ValidationRules"
-			 xmlns:viewmodels="clr-namespace:Crud.ViewModels"
-			 d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+			 xmlns:viewmodels="clr-namespace:CrudLib.ViewModels" 
+			 xmlns:viewmodels1="clr-namespace:CrudLib.ViewModels;assembly=CrudLib"
+			 d:DataContext="{d:DesignInstance Type=viewmodels1:MainViewModel}"
 			 mc:Ignorable="d" 
 			 d:DesignHeight="450" d:DesignWidth="900">
 	<Grid>

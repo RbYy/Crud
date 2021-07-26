@@ -1,6 +1,6 @@
-using Crud;
-using Crud.Models;
-using Crud.ViewModels;
+using CrudLib;
+using CrudLib.Models;
+using CrudLib.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

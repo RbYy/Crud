@@ -2,8 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CrudLib
@@ -20,62 +18,43 @@ namespace CrudLib
 
 		public async Task<T> Create(T item)
 		{
-			using (PeopleDbContext context = peopleDbContextFactory.CreateDbContext(new string[] { }))
-			{
-				var created = await context
-					.Set<T>()
-					.AddAsync(item);
-				await context.SaveChangesAsync();
-				return created.Entity;
-			}
+			using PeopleDbContext context = peopleDbContextFactory.CreateDbContext(Array.Empty<string>());
+			var created = await context .Set<T>().AddAsync(item);
+			_ = await context.SaveChangesAsync();
+			return created.Entity;
 		}
 
 		public async Task<bool> Delete(int id)
 		{
-			using (PeopleDbContext context = peopleDbContextFactory.CreateDbContext(new string[] { }))
+			using PeopleDbContext context = peopleDbContextFactory.CreateDbContext(Array.Empty<string>());
+			T item = await context.Set<T>().FirstOrDefaultAsync(i => i.Id == id);
+			if (item == null)
 			{
-				T item = await context.Set<T>().FirstOrDefaultAsync( i => i.Id == id);
-				if (item == null)
-				{
-					return false;
-				}
-				context
-					.Set<T>()
-					.Remove(item);
-				await context.SaveChangesAsync();
-				return true;
+				return false;
 			}
+			_ = context.Set<T>().Remove(item);
+			_ = await context.SaveChangesAsync();
+			return true;
 		}
 
 		public async Task<T> Get(int id)
 		{
-			using (PeopleDbContext context = peopleDbContextFactory.CreateDbContext(new string[] { }))
-			{
-				return await context
-					.Set<T>()
-					.FirstOrDefaultAsync(i => i.Id == id);
-			}
+			using PeopleDbContext context = peopleDbContextFactory.CreateDbContext(Array.Empty<string>());
+			return await context.Set<T>().FirstOrDefaultAsync(i => i.Id == id);
 		}
 
 		public async Task<IEnumerable<T>> GetAll()
 		{
-			using (PeopleDbContext context = peopleDbContextFactory.CreateDbContext(new string[] { }))
-			{
-				return await context.Set<T>().ToListAsync();
-			}
-			
+			using PeopleDbContext context = peopleDbContextFactory.CreateDbContext(Array.Empty<string>());
+			return await context.Set<T>().ToListAsync();
 		}
 
 		public async Task<T> Update(int id, T item)
 		{
-			using (PeopleDbContext context = peopleDbContextFactory.CreateDbContext(new string[] { }))
-			{
-				context
-					.Set<T>()
-					.Update(item);
-				await context.SaveChangesAsync();
-				return item;
-			}
+			using PeopleDbContext context = peopleDbContextFactory.CreateDbContext(Array.Empty<string>());
+			_ = context.Set<T>().Update(item);
+			_ = await context.SaveChangesAsync();
+			return item;
 		}
 	}
 }

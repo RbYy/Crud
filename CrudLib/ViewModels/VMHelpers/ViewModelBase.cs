@@ -12,8 +12,8 @@ namespace CrudLib.ViewModels
 	{
 		//protected GenericDBActions<Person> DataService = new PeopleDBActions(new PeopleDbContextFactory());
 
-		public IDataActions<Person> DataService { get; set; }
-		public ViewModelBase(IDataActions<Person> dataService)
+		public IPeopleDataActions<Person> DataService { get; set; }
+		public ViewModelBase(IPeopleDataActions<Person> dataService)
 		{
 			DataService = dataService;
 		}

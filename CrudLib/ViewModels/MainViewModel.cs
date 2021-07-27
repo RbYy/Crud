@@ -22,7 +22,6 @@ namespace CrudLib.ViewModels
 		private ObservableCollection<Person> peopleList;
 		private Person inputPerson;
 
-		public Msg _Msg { get; set; }
 		public ObservableCollection<Person> PeopleList {	get => peopleList; set { peopleList = value; OnPropertyChanged(nameof(PeopleList)); } }
 		public Person InputPerson	{ get => inputPerson;	set { inputPerson	= value; OnPropertyChanged(nameof(InputPerson)); } }
 		public string Message		{ get => message;		set { message		= value; OnPropertyChanged(nameof(Message)); } }
@@ -38,31 +37,33 @@ namespace CrudLib.ViewModels
 			}
 		}
 
-		public MainViewModel(IDataActions<Person> dataService) : base(dataService)
+		public MainViewModel(IPeopleDataActions<Person> dataService) : base(dataService)
 		{
 			CmdCreate = new ActionCommand(Create);
 			CmdUpdate = new ActionCommand(Update);
 			CmdDelete = new ActionCommand(Delete);
-			CmdSearch = new ActionCommand(Search);
+			CmdSearch = new ActionCommand(GetByFiscal);
 			PeopleList = new ObservableCollection<Person>(DataService.GetAll().Result);
 			InputPerson = new();
 		}
 
-		private void Delete(object obj)
+		public void Delete(object obj)
 		{
+			// A person must be selected from the list in order to be possibly removed
+			// Prevents attempts to remove inexisting people
 			if (SelectedPerson != null
-				&& !DataService.Delete(SelectedPerson.Id).Result)
+				&& DataService.Delete(SelectedPerson.Id).Result)
 			{
-				Message = new Msg(SelectedPerson).DeleteFail;
+				Message = new Msg(SelectedPerson).Deleted;
+
+				_ = PeopleList.Remove(SelectedPerson);
+				InputPerson = null;
 				return;
 			}
-			Message = new Msg(SelectedPerson).Deleted;
-
-			PeopleList.Remove(SelectedPerson);
-			InputPerson = null;
+			Message = new Msg(SelectedPerson).DeleteFail;
 		}
 
-		private void Update(object obj)
+		public void Update(object obj)
 		{
 			if (InputPerson == null)
 			{
@@ -81,12 +82,13 @@ namespace CrudLib.ViewModels
 			Message = new Msg(InputPerson).Updated;
 		}
 
-		private void Create(object o)
+		public void Create(object o)
 		{
 			InputPerson ??= new();
 			if (PeopleList.Any(person => person.FiscalNumber == InputPerson.FiscalNumber))
 			{
-				Message = new Msg(SelectedPerson).AlreadyExists; return;
+				Message = new Msg(SelectedPerson).AlreadyExists;
+				return;
 			}
 
 			var newPerson = new Person(InputPerson);
@@ -99,9 +101,9 @@ namespace CrudLib.ViewModels
 		}
 
 		// Searches a person by fiscal number (retreiving)
-		private void Search(object o)
+		public void GetByFiscal(object o)
 		{
-			Person found = (DataService as PeopleDBActions).GetByFiscal(InputPerson.FiscalNumber).Result;
+			Person found = DataService.GetByFiscal(InputPerson.FiscalNumber).Result;
 			if (found == null)
 			{
 				Message = new Msg(inputPerson).NotExist;
@@ -117,6 +119,5 @@ namespace CrudLib.ViewModels
 			var people = await DataService.GetAll();
 			return people.Count();
 		}
-
 	}
 }

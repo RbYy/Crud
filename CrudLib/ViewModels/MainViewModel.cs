@@ -57,7 +57,7 @@ namespace CrudLib.ViewModels
 				Message = new Msg(SelectedPerson).Deleted;
 
 				_ = PeopleList.Remove(SelectedPerson);
-				InputPerson = null;
+				InputPerson = new();
 				return;
 			}
 			Message = new Msg(SelectedPerson).DeleteFail;

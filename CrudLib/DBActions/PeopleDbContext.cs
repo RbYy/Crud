@@ -15,12 +15,9 @@ namespace CrudLib
 	public class PeopleDbContext : DbContext
 	{
 		public DbSet<Person> People { get; set; }
-		public PeopleDbContext(DbContextOptions dbContextOptions) : base() 
+		public PeopleDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions) 
 		{
 			Database.EnsureCreated();
 		}
-
-		protected override void OnConfiguring(DbContextOptionsBuilder options)
-			=> options.UseSqlite(@"DataSource=people.db;");
 	}
 }

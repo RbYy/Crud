@@ -13,6 +13,7 @@ namespace CrudLib.Models
 		private int fiscalNumber;
 		private string address;
 
+
 		public string	FirstName	{ get => firstName;		set { firstName		= value; OnPropertyChanged(nameof(FirstName)); } }
 		public string	LastName	{ get => lastName;		set { lastName		= value; OnPropertyChanged(nameof(LastName)); } }
 		public int		FiscalNumber{ get => fiscalNumber;	set { fiscalNumber	= value; OnPropertyChanged(nameof(FiscalNumber)); } }

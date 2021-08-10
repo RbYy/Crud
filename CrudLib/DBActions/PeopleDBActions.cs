@@ -11,12 +11,10 @@ namespace CrudLib
 
 		public async Task<Person> GetByFiscal(int fiscal)
 		{
-			using (PeopleDbContext context = peopleDbContextFactory.CreateDbContext(new string[] { }))
-			{ 
-				return await context
-					.Set<Person>()
-					.FirstOrDefaultAsync(i => i.FiscalNumber == fiscal);
-			}
+			using PeopleDbContext context = peopleDbContextFactory.CreateDbContext();
+			return await context
+				.Set<Person>()
+				.FirstOrDefaultAsync(i => i.FiscalNumber == fiscal);
 		}
 	}
 }

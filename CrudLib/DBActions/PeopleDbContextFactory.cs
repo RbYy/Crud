@@ -10,7 +10,7 @@ namespace CrudLib
 {
 	public class PeopleDbContextFactory : IDesignTimeDbContextFactory<PeopleDbContext>
 	{
-		public PeopleDbContext CreateDbContext(string[] args)
+		public PeopleDbContext CreateDbContext(string[] args = null)
 		{
 			DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder<PeopleDbContext>();
 

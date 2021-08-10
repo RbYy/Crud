@@ -30,9 +30,7 @@ namespace TestProject1
 
 		public async Task<bool> Delete(int id)
 		{
-			return TestStorageDB.RemoveAll(item => item.Id == id) == 0
-				? false
-				: true;
+			return TestStorageDB.RemoveAll(item => item.Id == id) > 0;
 		}
 
 		public async Task<T> Get(int id) => TestStorageDB.FirstOrDefault( p => p.Id == id);

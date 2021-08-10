@@ -57,7 +57,7 @@ namespace CrudLib.ViewModels
 				Message = new Msg(SelectedPerson).Deleted;
 
 				_ = PeopleList.Remove(SelectedPerson);
-				InputPerson = null;
+				InputPerson = new();
 				return;
 			}
 			Message = new Msg(SelectedPerson).DeleteFail;
@@ -78,6 +78,7 @@ namespace CrudLib.ViewModels
 			SelectedPerson = new(InputPerson);
 			DataService.Update(SelectedPerson.Id, SelectedPerson);
 			var index = PeopleList.IndexOf(PeopleList.FirstOrDefault((p) => p.Id == InputPerson.Id));
+			if (index < 0) return;
 			PeopleList[index] = SelectedPerson;
 			Message = new Msg(InputPerson).Updated;
 		}
